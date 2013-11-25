@@ -45,7 +45,19 @@ public class GestionnaireOperations
 	
 	public void Demarre()
 	{
-		InstanceControleur.Demarrer();
+		if(this.CycleSelectionne != null)
+		{
+			InstanceControleur.Demarrer(this.CycleSelectionne);
+			
+			//Timer timer = new Timer();
+	        //timer.schedule(new TimerTask() {
+
+	        //    @Override
+	        //    public void run() {
+	        //        test.doStuff();
+	        //    }
+	        //}, 0, test.myLong);
+		}		
 	}
 	
 	public void Arreter()
@@ -55,11 +67,12 @@ public class GestionnaireOperations
 	
 	public void ChangerTempsRestant(int minutes)
 	{
+		this.TempsRestantAuLavage = minutes;
 	}
 	
 	public void AjusterNiveauEau(int niveau)
 	{
-		
+		InstanceControleur.ChangerNiveauEau(niveau);
 	}
 	
 	public void MettreAJourTemperature()

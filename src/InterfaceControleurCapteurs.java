@@ -99,7 +99,7 @@ public class InterfaceControleurCapteurs {
 		return true;
 	}
 	
-	public boolean Demarrer()
+	public boolean Demarrer(Cycle cycleActuel)
 	{
 		
 		// Logique pour demarrer la machine a laver
