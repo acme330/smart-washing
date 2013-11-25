@@ -90,4 +90,20 @@ public class InterfaceControleurCapteurs {
 	public void EvacuerEauUsee() {
 		
 	}
+
+	public boolean Arreter()
+	{
+		
+		// Logique pour arreter la machine a laver.
+		
+		return true;
+	}
+	
+	public boolean Demarrer()
+	{
+		
+		// Logique pour demarrer la machine a laver
+		
+		return true;
+	}
 }
