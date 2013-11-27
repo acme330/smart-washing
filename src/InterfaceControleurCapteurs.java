@@ -9,6 +9,7 @@ public class InterfaceControleurCapteurs {
 	
 	public static void main(String[] args) {
 		InterfaceControleurCapteurs test = new InterfaceControleurCapteurs();
+		test.ChangerNiveauEau(15);
 	}
 	
 	/**
@@ -20,10 +21,24 @@ public class InterfaceControleurCapteurs {
 	}
 	
 	/**
-	 * 
+	 * Permet de changer le niveau d'eau à l'aide d'une valeur entre 0 et 15.
 	 * @param niveauEau
 	 */
 	public void ChangerNiveauEau(int niveauEau) {
+		String niveauBinaire = Integer.toBinaryString(niveauEau);
+		String niveauBinaireParsed = niveauBinaire;
+		//Ajoute les 0 devant la chaine de binaire si la chaine n'a pas une longueur de 4 bits
+		if(niveauBinaire.length() < 4) {
+			for(int i = 0; i < 4 - niveauBinaire.length(); i++) {
+				niveauBinaireParsed = "0" + niveauBinaireParsed;
+			}
+		}
+		//Renverse le sens des bits pour ajouter plus facilement dans le commutateur.
+		String reverseBinary = new StringBuilder(niveauBinaireParsed).reverse().toString();
+		//Écris la valeur dans le bon commutateur aux bonnes adresses.
+		for(int i = 0; i < 4; i++) {
+			this.write("0x0200", i, Character.toString(reverseBinary.charAt(i)));
+		}
 		
 	}
 	
