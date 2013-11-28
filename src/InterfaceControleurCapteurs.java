@@ -77,8 +77,32 @@ public class InterfaceControleurCapteurs {
 	/**
 	 * 
 	 */
+	public void ArreterSavon() {
+		this.write("0x0100", 4, "0");
+	}
+	
+	/**
+	 * 
+	 */
 	public void AjouterAssouplisseur() {
 		this.write("0x0100", 6, "1");
+	}
+	
+	public void ArreterAssouplisseur() {
+		this.write("0x0100", 6, "0");
+	}
+	
+	/**
+	 * 
+	 */
+	public void AjouterJavellisant() {
+		this.write("0x0100", 5, "0");
+	}
+	/**
+	 * 
+	 */
+	public void ArreterJavellisant() {
+		this.write("0x0100", 5, "1");
 	}
 	
 	/**
@@ -132,6 +156,7 @@ public class InterfaceControleurCapteurs {
 		this.write("0x0200", 5, "0");
 		this.write("0x0200", 6, "0");
 		this.write("0x0200", 7, "0");
+		this.write("0x0700", 0, "0");
 		this.write("0x0700", 5, "0");
 		
 		//Fermer les valves d'eau
@@ -150,6 +175,9 @@ public class InterfaceControleurCapteurs {
 			this.write("0x0100", 2, "1");//Valve d'eau froide
 		} else if(cycleActuel.Type == TypeCycle.Rugueux) {
 			this.write("0x0200", 7, "1");
+			this.write("0x0100", 2, "1");//Valve d'eau froide
+		} else if(cycleActuel.Type == TypeCycle.Desinfection) {
+			this.write("0x0700", 0, "1");
 			this.write("0x0100", 2, "1");//Valve d'eau froide
 		} else if(cycleActuel.Type == TypeCycle.Trempage) {
 			this.write("0x0700", 5, "1");
