@@ -9,7 +9,7 @@ public class InterfaceControleurCapteurs {
 	
 	public static void main(String[] args) {
 		InterfaceControleurCapteurs test = new InterfaceControleurCapteurs();
-		test.ChangerNiveauEau(15);
+		test.ObtenirNiveauEau();
 	}
 	
 	/**
@@ -109,7 +109,17 @@ public class InterfaceControleurCapteurs {
 	 * @return
 	 */
 	public int ObtenirNiveauEau() {
-		return 0;
+		int niveauEau = 0;
+		String niveauEauBinaire = null;
+		for(int i = 0; i < 4; i++) {
+			if(niveauEauBinaire == null) {
+				niveauEauBinaire = this.read("0x0700", 4-i);
+			} else {
+				niveauEauBinaire += this.read("0x0700", 4-i);
+			}
+		}
+		niveauEau = Integer.parseInt(niveauEauBinaire, 2);
+		return niveauEau;
 	}
 	
 	public void EvacuerEauUsee() {
