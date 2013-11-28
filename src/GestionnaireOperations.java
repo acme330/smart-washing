@@ -9,18 +9,20 @@ public class GestionnaireOperations
 	private Cycle CycleSelectionne;
 	private InterfaceControleurCapteurs InstanceControleur;
 	private int NiveauEauSelectionne;
+	private GUI gui;
 	
-	public GestionnaireOperations()
+	public GestionnaireOperations(GUI gui)
 	{
+		this.gui = gui;
 		InstanceControleur = new InterfaceControleurCapteurs();
 		
 		// Creation des plusieurs cycles
 		
-		Cycle coton = new Cycle(TypeCycle.Cotton, 40, 50, NiveauEauSelectionne, 20,10,45,10);
-		Cycle synthetique = new Cycle(TypeCycle.Synthetique, 50, 60, NiveauEauSelectionne, 10,15,30,5);
-		Cycle rugueux = new Cycle(TypeCycle.Rugueux, 30, 40, NiveauEauSelectionne, 20,8,45,10);
-		Cycle desinfection = new Cycle(TypeCycle.Desinfection, 40, 50, NiveauEauSelectionne, 20,10,45,10);
-		Cycle trempage = new Cycle(TypeCycle.Trempage, 20, 30, NiveauEauSelectionne, 20,10,45,10);
+		Cycle coton = new Cycle(TypeCycle.Cotton, 40, 50, getNiveauEauSelectionne(), 20,10,45,10);
+		Cycle synthetique = new Cycle(TypeCycle.Synthetique, 50, 60, getNiveauEauSelectionne(), 10,15,30,5);
+		Cycle rugueux = new Cycle(TypeCycle.Rugueux, 30, 40, getNiveauEauSelectionne(), 20,8,45,10);
+		Cycle desinfection = new Cycle(TypeCycle.Desinfection, 40, 50, getNiveauEauSelectionne(), 20,10,45,10);
+		Cycle trempage = new Cycle(TypeCycle.Trempage, 20, 30, getNiveauEauSelectionne(), 20,10,45,10);
 		
 		ListeCyclesDisponibles = new ArrayList<Cycle>();
 		
@@ -38,16 +40,16 @@ public class GestionnaireOperations
 		{
 			if(cycleCourant.Type == cycleSelectionne)
 			{
-				this.CycleSelectionne = cycleCourant;
+				this.setCycleSelectionne(cycleCourant);
 			}
 		}
 	}
 	
 	public void Demarre()
 	{
-		if(this.CycleSelectionne != null)
+		if(this.getCycleSelectionne() != null)
 		{
-			InstanceControleur.Demarrer(this.CycleSelectionne);
+			InstanceControleur.Demarrer(this.getCycleSelectionne());
 			
 			//Timer timer = new Timer();
 	        //timer.schedule(new TimerTask() {
@@ -67,7 +69,7 @@ public class GestionnaireOperations
 	
 	public void ChangerTempsRestant(int minutes)
 	{
-		this.TempsRestantAuLavage = minutes;
+		this.setTempsRestantAuLavage(minutes);
 	}
 	
 	public void AjusterNiveauEau(int niveau)
@@ -77,12 +79,46 @@ public class GestionnaireOperations
 	
 	public void MettreAJourTemperature()
 	{
-		this.TemperatureCourante = InstanceControleur.ObtenirTemperature();
+		this.setTemperatureCourante(InstanceControleur.ObtenirTemperature());
 	}
 	
 	public ArrayList<Cycle> ObtenirCycles()
 	{
 		return ListeCyclesDisponibles;
+	}
+
+	
+	//ACCESSEURS
+	public int getNiveauEauSelectionne() {
+		return NiveauEauSelectionne;
+	}
+
+	public void setNiveauEauSelectionne(int niveauEauSelectionne) {
+		NiveauEauSelectionne = niveauEauSelectionne;
+	}
+
+	public Cycle getCycleSelectionne() {
+		return CycleSelectionne;
+	}
+
+	public void setCycleSelectionne(Cycle cycleSelectionne) {
+		CycleSelectionne = cycleSelectionne;
+	}
+
+	public int getTemperatureCourante() {
+		return TemperatureCourante;
+	}
+
+	public void setTemperatureCourante(int temperatureCourante) {
+		TemperatureCourante = temperatureCourante;
+	}
+
+	public int getTempsRestantAuLavage() {
+		return TempsRestantAuLavage;
+	}
+
+	public void setTempsRestantAuLavage(int tempsRestantAuLavage) {
+		TempsRestantAuLavage = tempsRestantAuLavage;
 	}
 	
 	

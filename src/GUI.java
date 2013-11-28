@@ -15,7 +15,7 @@ import javax.swing.JProgressBar;
 public class GUI extends JFrame {
 
 	private JPanel contentPane;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -24,6 +24,9 @@ public class GUI extends JFrame {
 			public void run() {
 				try {
 					GUI frame = new GUI();
+					GestionnaireOperations gest = new GestionnaireOperations(frame);
+					
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,7 +84,7 @@ public class GUI extends JFrame {
 		panel.add(tempLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("Washing cycle");
-		lblNewLabel_2.setBounds(119, 116, 71, 14);
+		lblNewLabel_2.setBounds(119, 116, 100, 14);
 		panel.add(lblNewLabel_2);
 		
 		JLabel timeLabel = new JLabel("New label");
@@ -89,7 +92,7 @@ public class GUI extends JFrame {
 		panel.add(timeLabel);
 		
 		JLabel lblNewLabel_4 = new JLabel("Time Management");
-		lblNewLabel_4.setBounds(246, 47, 89, 14);
+		lblNewLabel_4.setBounds(246, 47, 110, 14);
 		panel.add(lblNewLabel_4);
 		
 		JProgressBar waterLevel = new JProgressBar();
@@ -97,7 +100,7 @@ public class GUI extends JFrame {
 		panel.add(waterLevel);
 		
 		JButton btnSpinDrying = new JButton("Spin Drying");
-		btnSpinDrying.setBounds(223, 141, 89, 23);
+		btnSpinDrying.setBounds(223, 141, 110, 23);
 		panel.add(btnSpinDrying);
 		
 		JButton DesinfectionButton = new JButton("Sanitize");
