@@ -8,8 +8,9 @@ public class InterfaceControleurCapteurs {
 
 	
 	public static void main(String[] args) {
+		Cycle testCycle = new Cycle(TypeCycle.Cotton, 40, 50, 1, 20,10,45,10);
 		InterfaceControleurCapteurs test = new InterfaceControleurCapteurs();
-		test.ObtenirNiveauEau();
+		test.Demarrer(testCycle);
 	}
 	
 	/**
@@ -70,14 +71,14 @@ public class InterfaceControleurCapteurs {
 	 * 
 	 */
 	public void AjouterSavon() {
-		
+		this.write("0x0100", 4, "1");
 	}
 	
 	/**
 	 * 
 	 */
 	public void AjouterAssouplisseur() {
-		
+		this.write("0x0100", 6, "1");
 	}
 	
 	/**
@@ -105,7 +106,7 @@ public class InterfaceControleurCapteurs {
 	}
 	
 	/**
-	 * 
+	 * Retourne la valeur du niveau d'eau du capteur de niveau d'eau. La valeur est un int entre 0 et 15.
 	 * @return
 	 */
 	public int ObtenirNiveauEau() {
@@ -126,20 +127,35 @@ public class InterfaceControleurCapteurs {
 		
 	}
 
-	public boolean Arreter()
-	{
+	public void Arreter() {
+		//Retirer la sélection du cycle
+		this.write("0x0200", 5, "0");
+		this.write("0x0200", 6, "0");
+		this.write("0x0200", 7, "0");
+		this.write("0x0700", 5, "0");
 		
-		// Logique pour arreter la machine a laver.
+		//Fermer les valves d'eau
+		this.write("0x0100", 2, "0");
+		this.write("0x0100", 3, "0");
 		
-		return true;
+		this.write("0x0200", 4, "0"); //Arrête le cycle
 	}
 	
-	public boolean Demarrer(Cycle cycleActuel)
-	{
-		
-		// Logique pour demarrer la machine a laver
-		
-		return true;
+	public void Demarrer(Cycle cycleActuel) {
+		if(cycleActuel.Type == TypeCycle.Cotton) {
+			this.write("0x0200", 5, "1");
+			this.write("0x0100", 2, "1"); //Valve d'eau froide
+		} else if(cycleActuel.Type == TypeCycle.Synthetique) {
+			this.write("0x0200", 6, "1");
+			this.write("0x0100", 2, "1");//Valve d'eau froide
+		} else if(cycleActuel.Type == TypeCycle.Rugueux) {
+			this.write("0x0200", 7, "1");
+			this.write("0x0100", 2, "1");//Valve d'eau froide
+		} else if(cycleActuel.Type == TypeCycle.Trempage) {
+			this.write("0x0700", 5, "1");
+		}
+		this.write("0x0100", 3, "1"); //Valve d'eau chaude
+		this.write("0x0200", 4, "1"); //Démarrer le cycle
 	}
 	
 	/**
