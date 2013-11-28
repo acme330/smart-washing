@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,7 +10,6 @@ import javax.swing.Timer;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.Calendar;
 
 
 public class GUI extends JFrame{
@@ -31,12 +29,12 @@ public class GUI extends JFrame{
 					//initialize gui and Gestionnaire
 					GestionnaireOperations gest = new GestionnaireOperations();
 					GUI frame = new GUI(gest);
-					gest.attachedGUI(frame);
+					gest.setGUI(frame);
 					frame.setVisible(true);
 					
-					
+					frame.update();
 					//start file listener
-					final Timer timer = new Timer(500, null);
+					final Timer timer = new Timer(16, null);
 					timer.addActionListener(new FileListener(frame));
 					timer.start();
 					
@@ -140,7 +138,10 @@ public class GUI extends JFrame{
 		panel.add(lblNewLabel_4);
 		
 		waterLevel = new JProgressBar();
+		waterLevel.setMinimum(0);
+		waterLevel.setMaximum(10);
 		waterLevel.setBounds(21, 47, 40, 14);
+		waterLevel.setValue(5);
 		panel.add(waterLevel);
 		
 
@@ -229,7 +230,8 @@ public class GUI extends JFrame{
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gest.AjusterNiveauEau(gest.getNiveauEauSelectionne()+1);
+			if(gest.getNiveauEauSelectionne() < 10)
+				gest.AjusterNiveauEau(gest.getNiveauEauSelectionne()+1);
 			
 		}
 		
@@ -244,7 +246,8 @@ public class GUI extends JFrame{
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gest.AjusterNiveauEau(gest.getNiveauEauSelectionne()-1);
+			if(gest.getNiveauEauSelectionne() > 0)
+				gest.AjusterNiveauEau(gest.getNiveauEauSelectionne()-1);
 		}
 		
 	}

@@ -77,6 +77,7 @@ public class GestionnaireOperations
 	public void AjusterNiveauEau(int niveau)
 	{
 		InstanceControleur.ChangerNiveauEau(niveau);
+		setNiveauEauSelectionne(niveau);
 	}
 	
 	public void MettreAJourTemperature()
@@ -90,7 +91,7 @@ public class GestionnaireOperations
 	}
 
 	
-	public void attachedGUI(GUI gui)
+	public void setGUI(GUI gui)
 	{
 		this.gui = gui;
 	}
