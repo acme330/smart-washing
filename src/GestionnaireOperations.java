@@ -1,7 +1,10 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
-public class GestionnaireOperations 
+public class GestionnaireOperations
 {
 	private ArrayList<Cycle> ListeCyclesDisponibles;
 	private int TempsRestantAuLavage;
@@ -11,9 +14,8 @@ public class GestionnaireOperations
 	private int NiveauEauSelectionne;
 	private GUI gui;
 	
-	public GestionnaireOperations(GUI gui)
+	public GestionnaireOperations()
 	{
-		this.gui = gui;
 		InstanceControleur = new InterfaceControleurCapteurs();
 		
 		// Creation des plusieurs cycles
@@ -88,6 +90,10 @@ public class GestionnaireOperations
 	}
 
 	
+	public void attachedGUI(GUI gui)
+	{
+		this.gui = gui;
+	}
 	//ACCESSEURS
 	public int getNiveauEauSelectionne() {
 		return NiveauEauSelectionne;
@@ -121,5 +127,7 @@ public class GestionnaireOperations
 		TempsRestantAuLavage = tempsRestantAuLavage;
 	}
 	
+	
+
 	
 }
