@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -6,8 +7,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
+import javax.swing.Timer;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
 
 
 public class GUI extends JFrame{
@@ -24,11 +28,20 @@ public class GUI extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					//initialize gui and Gestionnaire
 					GestionnaireOperations gest = new GestionnaireOperations();
 					GUI frame = new GUI(gest);
 					gest.attachedGUI(frame);
-					
 					frame.setVisible(true);
+					
+					
+					//start file listener
+					final Timer timer = new Timer(500, null);
+					timer.addActionListener(new FileListener(frame));
+					timer.start();
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,7 +50,10 @@ public class GUI extends JFrame{
 	}
 
 	
-	
+	/**
+	 * Update View when file has changed
+	 * 
+	 */
 	public void update() 
 	{
 		this.timeLabel.setText(Integer.toString(gest.getTempsRestantAuLavage()));
