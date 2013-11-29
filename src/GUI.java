@@ -19,6 +19,8 @@ public class GUI extends JFrame{
 	private JLabel timeLabel;
 	private JLabel tempLabel;
 	private JProgressBar waterLevel;
+	private boolean demarre = false;
+	private JButton startButton;
 	/**
 	 * Launch the application.
 	 */
@@ -96,7 +98,7 @@ public class GUI extends JFrame{
 		syntheticButton.setBounds(10, 175, 89, 23);
 		panel.add(syntheticButton);
 		
-		JButton roughButton = new JButton("rough");
+		JButton roughButton = new JButton("Rough");
 		roughButton.addActionListener(new CycleRugeuListener(gest));
 		roughButton.setBounds(10, 209, 89, 23);
 		panel.add(roughButton);
@@ -112,7 +114,7 @@ public class GUI extends JFrame{
 		panel.add(btnSpinDrying);
 		
 		
-		JButton startButton = new JButton("Start");
+		startButton = new JButton("Start");
 		startButton.addActionListener(new StartListener(gest));
 		startButton.setBounds(493, 38, 89, 23);
 		panel.add(startButton);
@@ -261,7 +263,21 @@ public class GUI extends JFrame{
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gest.Demarre();
+			
+			if(demarre)
+			{
+				gest.Arreter();
+				demarre = false;
+				startButton.setText("Start");
+			}
+			else
+			{
+				gest.Demarre();
+				demarre = true;
+				startButton.setText("Stop");
+			}
+			
+			
 		}
 		
 	}
