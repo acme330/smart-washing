@@ -62,7 +62,14 @@ public class GUI extends JFrame{
 	{
 		this.timeLabel.setText(Integer.toString(gest.getTempsRestantAuLavage()));
 		gest.MettreAJourTemperature();
-		this.tempLabel.setText(Integer.toString(gest.getTemperatureCourante()));
+		int temp = gest.getTemperatureCourante();
+		if(temp == 1)
+			temp = 90;
+		else if(temp == 2)
+			temp = 25;
+		else if(temp == 3)
+			temp = 50;
+		this.tempLabel.setText(Integer.toString(temp));
 		waterLevel.setValue(gest.getNiveauEauSelectionne());
 	}
 	
