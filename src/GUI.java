@@ -61,6 +61,7 @@ public class GUI extends JFrame{
 	public void update() 
 	{
 		this.timeLabel.setText(Integer.toString(gest.getTempsRestantAuLavage()));
+		gest.MettreAJourTemperature();
 		this.tempLabel.setText(Integer.toString(gest.getTemperatureCourante()));
 		waterLevel.setValue(gest.getNiveauEauSelectionne());
 	}
@@ -142,7 +143,7 @@ public class GUI extends JFrame{
 		panel.add(lblNewLabel);
 		
 		tempLabel = new JLabel("New label");
-		tempLabel.setBounds(386, 47, 46, 14);
+		tempLabel.setBounds(376, 47, 17, 14);
 		tempLabel.setForeground(Color.white);
 		panel.add(tempLabel);
 		
@@ -154,12 +155,12 @@ public class GUI extends JFrame{
 		panel.add(lblNewLabel_2);
 		
 		timeLabel = new JLabel("New label");
-		timeLabel.setBounds(264, 23, 46, 14);
+		timeLabel.setBounds(243, 47, 46, 14);
 		timeLabel.setForeground(Color.white);
 		panel.add(timeLabel);
 		
-		JLabel lblNewLabel_4 = new JLabel("Time Management :");
-		lblNewLabel_4.setBounds(246, 47, 130, 14);
+		JLabel lblNewLabel_4 = new JLabel("Time Management");
+		lblNewLabel_4.setBounds(206, 22, 130, 14);
 		Font font1 = new Font("Verdana", Font.BOLD,12);
 		lblNewLabel_4.setFont(font1);
 		lblNewLabel_4.setForeground(Color.white);
@@ -175,6 +176,18 @@ public class GUI extends JFrame{
 		
 		getContentPane().setBackground(new Color(54, 60, 87));
 		panel.setBackground(new Color(54, 60, 87));
+		
+		JLabel lblTemperature = new JLabel("Temperature");
+		lblTemperature.setForeground(Color.WHITE);
+		lblTemperature.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblTemperature.setBounds(351, 23, 130, 14);
+		panel.add(lblTemperature);
+		
+		JLabel lblNewLabel_1 = new JLabel("\u00B0C");
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel_1.setBounds(395, 47, 24, 14);
+		panel.add(lblNewLabel_1);
 
 	}
 	
