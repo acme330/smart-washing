@@ -1,8 +1,12 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
@@ -66,6 +70,7 @@ public class GUI extends JFrame{
 	 */
 	public GUI(GestionnaireOperations gest) {
 		this.gest = gest;
+		this.setTitle("SmartWashing");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 618, 284);
 		contentPane = new JPanel();
@@ -74,8 +79,9 @@ public class GUI extends JFrame{
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 592, 235);
+		panel.setBounds(0, 0, 592, 400);
 		contentPane.add(panel);
+		
 		panel.setLayout(null);
 		
 		JButton addWaterButton = new JButton("+");
@@ -88,29 +94,40 @@ public class GUI extends JFrame{
 		removeWaterButton.setBounds(84, 60, 89, 23);
 		panel.add(removeWaterButton);
 		
-		JButton cottonButton = new JButton("Coton");
+		JButton cottonButton = new CreateRoundButton("Coton");
 		cottonButton.addActionListener(new CycleCotonListener(gest));
 		cottonButton.setBounds(10, 141, 89, 23);
+		cottonButton.setBackground(new Color(45,47,56));
+		cottonButton.setForeground(Color.WHITE);
 		panel.add(cottonButton);
 		
-		JButton syntheticButton = new JButton("Synthetic");
+		JButton syntheticButton = new CreateRoundButton("Synthetic");
 		syntheticButton.addActionListener(new CycleSyntheticListener(gest));
 		syntheticButton.setBounds(10, 175, 89, 23);
+		syntheticButton.setBackground(new Color(45,47,56));
+		syntheticButton.setForeground(Color.WHITE);
 		panel.add(syntheticButton);
 		
-		JButton roughButton = new JButton("Rough");
+		JButton roughButton = new CreateRoundButton("Rough");
 		roughButton.addActionListener(new CycleRugeuListener(gest));
 		roughButton.setBounds(10, 209, 89, 23);
+		roughButton.setBackground(new Color(45,47,56));
+		roughButton.setForeground(Color.WHITE);
 		panel.add(roughButton);
 		
-		JButton DesinfectionButton = new JButton("Sanitize");
+		JButton DesinfectionButton = new CreateRoundButton("Sanitize");
 		DesinfectionButton.addActionListener(new CycleDesinfectionListener(gest));
 		DesinfectionButton.setBounds(109, 141, 89, 23);
+		DesinfectionButton.setBackground(new Color(45,47,56));
+		DesinfectionButton.setForeground(Color.WHITE);
 		panel.add(DesinfectionButton);
 		
-		JButton btnSpinDrying = new JButton("Trempage");
+		JButton btnSpinDrying = new CreateRoundButton("Trempage");
 		btnSpinDrying.addActionListener(new CycleSpinDryingListener(gest));
 		btnSpinDrying.setBounds(223, 141, 110, 23);
+		btnSpinDrying.setBackground(new Color(45,47,56));
+		btnSpinDrying.setForeground(Color.WHITE);
+		btnSpinDrying.setSize(120, 90);
 		panel.add(btnSpinDrying);
 		
 		
@@ -120,23 +137,32 @@ public class GUI extends JFrame{
 		panel.add(startButton);
 		
 		JLabel lblNewLabel = new JLabel("Water Level");
-		lblNewLabel.setBounds(94, 23, 64, 14);
+		lblNewLabel.setBounds(94, 23, 70, 14);
+		lblNewLabel.setForeground(Color.white);
 		panel.add(lblNewLabel);
 		
 		tempLabel = new JLabel("New label");
-		tempLabel.setBounds(366, 42, 46, 14);
+		tempLabel.setBounds(386, 47, 46, 14);
+		tempLabel.setForeground(Color.white);
 		panel.add(tempLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("Washing cycle");
-		lblNewLabel_2.setBounds(119, 116, 100, 14);
+		lblNewLabel_2.setBounds(110, 110, 200, 20);
+		lblNewLabel_2.setForeground(Color.white);
+		Font font = new Font("Verdana", Font.BOLD,16);
+		lblNewLabel_2.setFont(font);
 		panel.add(lblNewLabel_2);
 		
 		timeLabel = new JLabel("New label");
 		timeLabel.setBounds(264, 23, 46, 14);
+		timeLabel.setForeground(Color.white);
 		panel.add(timeLabel);
 		
-		JLabel lblNewLabel_4 = new JLabel("Time Management");
-		lblNewLabel_4.setBounds(246, 47, 110, 14);
+		JLabel lblNewLabel_4 = new JLabel("Time Management :");
+		lblNewLabel_4.setBounds(246, 47, 130, 14);
+		Font font1 = new Font("Verdana", Font.BOLD,12);
+		lblNewLabel_4.setFont(font1);
+		lblNewLabel_4.setForeground(Color.white);
 		panel.add(lblNewLabel_4);
 		
 		waterLevel = new JProgressBar();
@@ -146,8 +172,10 @@ public class GUI extends JFrame{
 		waterLevel.setValue(5);
 		panel.add(waterLevel);
 		
-
 		
+		getContentPane().setBackground(new Color(54, 60, 87));
+		panel.setBackground(new Color(54, 60, 87));
+
 	}
 	
 	
