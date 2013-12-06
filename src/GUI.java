@@ -60,7 +60,10 @@ public class GUI extends JFrame{
 	 */
 	public void update() 
 	{
+		//time
 		this.timeLabel.setText(Integer.toString(gest.getTempsRestantAuLavage()));
+		
+		//temp
 		gest.MettreAJourTemperature();
 		int temp = gest.getTemperatureCourante();
 		if(temp == 1)
@@ -70,6 +73,7 @@ public class GUI extends JFrame{
 		else if(temp == 3)
 			temp = 50;
 		this.tempLabel.setText(Integer.toString(temp));
+		
 		waterLevel.setValue(gest.getNiveauEauSelectionne());
 	}
 	
@@ -175,7 +179,7 @@ public class GUI extends JFrame{
 		
 		waterLevel = new JProgressBar();
 		waterLevel.setMinimum(0);
-		waterLevel.setMaximum(10);
+		waterLevel.setMaximum(15);
 		waterLevel.setBounds(21, 47, 40, 14);
 		waterLevel.setValue(5);
 		panel.add(waterLevel);
@@ -280,7 +284,7 @@ public class GUI extends JFrame{
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(gest.getNiveauEauSelectionne() < 10)
+			if(gest.getNiveauEauSelectionne() < 15)
 				gest.AjusterNiveauEau(gest.getNiveauEauSelectionne()+1);
 			
 		}

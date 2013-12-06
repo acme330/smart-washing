@@ -97,6 +97,7 @@ public class GestionnaireOperations
 	}
 	//ACCESSEURS
 	public int getNiveauEauSelectionne() {
+		NiveauEauSelectionne = InstanceControleur.ObtenirNiveauEau();
 		return NiveauEauSelectionne;
 	}
 

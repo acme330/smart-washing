@@ -177,20 +177,25 @@ public class InterfaceControleurCapteurs {
 		if(cycleActuel.Type == TypeCycle.Cotton) {
 			this.write("0x0200", 5, "1");
 			this.write("0x0100", 2, "1"); //Valve d'eau froide
+			this.write("0x0100", 3, "1"); //Valve d'eau chaude
 		} else if(cycleActuel.Type == TypeCycle.Synthetique) {
 			this.write("0x0200", 6, "1");
 			this.write("0x0100", 2, "1");//Valve d'eau froide
+			this.write("0x0100", 3, "1"); //Valve d'eau chaude
 		} else if(cycleActuel.Type == TypeCycle.Rugueux) {
 			this.write("0x0200", 7, "1");
 			this.write("0x0100", 2, "1");//Valve d'eau froide
+			this.write("0x0100", 3, "1"); //Valve d'eau chaude
 		} else if(cycleActuel.Type == TypeCycle.Desinfection) {
 			this.write("0x0700", 0, "1");
-			this.write("0x0100", 2, "1");//Valve d'eau froide
+			this.write("0x0100", 2, "0");//Valve d'eau froide
+			this.write("0x0100", 3, "1"); //Valve d'eau chaude
 		} else if(cycleActuel.Type == TypeCycle.Trempage) {
 			this.write("0x0700", 5, "1");
-			this.write("0x0100", 2, "0");//Fermer la valve d'eau froide
+			this.write("0x0100", 2, "1");//Fermer la valve d'eau froide
+			this.write("0x0100", 3, "0"); //Valve d'eau chaude
 		}
-		this.write("0x0100", 3, "1"); //Valve d'eau chaude
+		
 		this.write("0x0200", 4, "1"); //Démarrer le cycle
 	}
 	
