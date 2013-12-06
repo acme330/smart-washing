@@ -28,8 +28,6 @@ public class InterfaceControleurCapteurs {
 		}
 		//Renverse le sens des bits pour ajouter plus facilement dans le commutateur.
 		String reverseBinary = new StringBuilder(niveauBinaireParsed).reverse().toString();
-		System.out.println(niveauBinaireParsed);
-		System.out.println(reverseBinary);
 		//Écris la valeur dans le bon commutateur aux bonnes adresses.
 		for(int i = 0; i < 4; i++) {
 			this.write("0x0200", i, Character.toString(reverseBinary.charAt(i)));
