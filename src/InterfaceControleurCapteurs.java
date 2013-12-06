@@ -5,14 +5,6 @@ import java.io.IOException;
 
 public class InterfaceControleurCapteurs {
 	
-
-	
-	public static void main(String[] args) {
-		Cycle testCycle = new Cycle(TypeCycle.Cotton, 40, 50, 1, 20,10,45,10);
-		InterfaceControleurCapteurs test = new InterfaceControleurCapteurs();
-		test.Demarrer(testCycle);
-	}
-	
 	/**
 	 * 
 	 * @param temperature 
@@ -107,10 +99,25 @@ public class InterfaceControleurCapteurs {
 	
 	/**
 	 * 
-	 * @return
+	 * @return Valeur entre 0 et 3 pour décrire les valves d'eau ouvertes.
+	 * 0 = Les 2 valves sont fermées
+	 * 1 = Seulement la valve d'eau chaude
+	 * 2 = Seulement la valve d'eau froide
+	 * 3 = Les 2 valves sont ouvertes
+	 * 
 	 */
 	public int ObtenirTemperature() {
-		return 0;
+		int temperature = 0;
+		String temperatureBinaire = null;
+		for(int i =0; i<2; i++) {
+			if(temperatureBinaire == null) {
+				temperatureBinaire = this.read("0x0100", i+2);
+			} else {
+				temperatureBinaire += this.read("0x0100", i+2);
+			}
+		}
+		temperature = Integer.parseInt(temperatureBinaire, 2);
+		return temperature;
 	}
 	
 	/**
@@ -130,8 +137,8 @@ public class InterfaceControleurCapteurs {
 	}
 	
 	/**
-	 * Retourne la valeur du niveau d'eau du capteur de niveau d'eau. La valeur est un int entre 0 et 15.
-	 * @return
+	 * 
+	 * @return Valeur du niveau d'eau du capteur de niveau d'eau. La valeur est un int entre 0 et 15.
 	 */
 	public int ObtenirNiveauEau() {
 		int niveauEau = 0;
@@ -181,6 +188,7 @@ public class InterfaceControleurCapteurs {
 			this.write("0x0100", 2, "1");//Valve d'eau froide
 		} else if(cycleActuel.Type == TypeCycle.Trempage) {
 			this.write("0x0700", 5, "1");
+			this.write("0x0100", 2, "0");//Fermer la valve d'eau froide
 		}
 		this.write("0x0100", 3, "1"); //Valve d'eau chaude
 		this.write("0x0200", 4, "1"); //Démarrer le cycle
